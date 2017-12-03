@@ -18,8 +18,32 @@ const INPUT: [[usize; 16]; 16] = [
 ];
 
 fn main() {
-  let ans: usize = INPUT.iter()
+  println!("{}", p1());
+  println!("{}", p2());
+}
+
+fn p1() -> usize {
+  INPUT.iter()
     .map(|row| row.iter().max().unwrap() - row.iter().min().unwrap())
-    .sum();
-  println!("{}", ans);
+    .sum()
+}
+
+fn p2() -> usize {
+  INPUT.iter()
+    .map(|row| {
+      for x in row {
+        for z in row {
+          if x == z {
+            continue;
+          }
+          if x % z == 0 {
+            return x / z;
+          } else if z % x == 0  {
+            return z / x;
+          }
+        }
+      }
+      unreachable!()
+    })
+    .sum()
 }

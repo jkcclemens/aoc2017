@@ -2,6 +2,7 @@ const INPUT: &str = "32941994713271959948248321975648598766826381888897682988942
 
 fn main() {
   println!("{}", solve_captcha(INPUT));
+  println!("{}", solve_captcha_p2(INPUT));
 }
 
 fn solve_captcha(input: &str) -> usize {
@@ -20,9 +21,27 @@ fn solve_captcha(input: &str) -> usize {
   total
 }
 
+fn solve_captcha_p2(input: &str) -> usize {
+  assert_eq!(0, input.len() % 2);
+  let skip = input.len() / 2;
+  let nums: Vec<usize> = input.chars().map(|x| x.to_string().parse().unwrap()).collect();
+  let mut total = 0;
+  for (i, c) in nums.iter().enumerate() {
+    let i = if i + skip > nums.len() - 1 {
+      i + skip - nums.len()
+    } else {
+      i + skip
+    };
+    if c == &nums[i] {
+      total += c;
+    }
+  }
+  total
+}
+
 #[cfg(test)]
 mod test {
-  use solve_captcha;
+  use {solve_captcha, solve_captcha_p2};
 
   #[test]
   fn test_solutions() {
@@ -30,5 +49,14 @@ mod test {
     assert_eq!(4, solve_captcha("1111"));
     assert_eq!(0, solve_captcha("1234"));
     assert_eq!(9, solve_captcha("91212129"));
+  }
+
+  #[test]
+  fn test_p2_solutions() {
+    assert_eq!(6, solve_captcha_p2("1212"));
+    assert_eq!(0, solve_captcha_p2("1221"));
+    assert_eq!(4, solve_captcha_p2("123425"));
+    assert_eq!(12, solve_captcha_p2("123123"));
+    assert_eq!(4, solve_captcha_p2("12131415"));
   }
 }
