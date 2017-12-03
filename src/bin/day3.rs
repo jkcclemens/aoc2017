@@ -33,7 +33,7 @@ fn p2() -> usize {
 
   for (x, y) in Spiral::default() {
     let new_value = adjacent(x, y).into_iter()
-      .filter(|pair| values.contains_key(&pair))
+      .filter(|pair| values.contains_key(pair))
       .map(|pair| values[&pair])
       .sum();
     if new_value > INPUT {
