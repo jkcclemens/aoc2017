@@ -57,6 +57,8 @@ fn adjacent(x: i64, y: i64) -> Vec<(i64, i64)> {
   ]
 }
 
+// https://stackoverflow.com/a/33639875 - this guy is da bomb
+
 struct Spiral {
   x: i64,
   y: i64,
