@@ -47,3 +47,18 @@ fn p2() -> usize {
     })
     .sum()
 }
+
+#[cfg(test)]
+mod test {
+  use {p1, p2};
+
+  #[test]
+  fn test_p1() {
+    assert_eq!(58975, p1());
+  }
+
+  #[test]
+  fn test_p2() {
+    assert_eq!(308, p2());
+  }
+}

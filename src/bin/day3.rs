@@ -93,3 +93,18 @@ impl Iterator for Spiral {
     }
   }
 }
+
+#[cfg(test)]
+mod test {
+  use {p1, p2};
+
+  #[test]
+  fn test_p1() {
+    assert_eq!(326, p1());
+  }
+
+  #[test]
+  fn test_p2() {
+    assert_eq!(363010, p2());
+  }
+}
