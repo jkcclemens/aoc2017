@@ -2,24 +2,25 @@ use std::fs::File;
 use std::io::Read;
 
 fn main() {
-  let mut content = String::new();
-  File::open("./inputs/day5").unwrap().read_to_string(&mut content).unwrap();
-  let instructions: Vec<isize> = content.split('\n')
-    .filter(|x| !x.is_empty())
-    .map(|x| x.parse().unwrap())
-    .collect();
+  let instructions = instructions();
 
   println!("{}", p1(instructions.clone()));
   println!("{}", p2(instructions));
 }
 
+fn instructions() -> Vec<isize> {
+  let mut content = String::new();
+  File::open("./inputs/day5").unwrap().read_to_string(&mut content).unwrap();
+  content.split('\n')
+    .filter(|x| !x.is_empty())
+    .map(|x| x.parse().unwrap())
+    .collect()
+}
+
 fn p1(mut instructions: Vec<isize>) -> usize {
   let mut steps = 0;
   let mut idx = 0;
-  loop {
-    if idx >= instructions.len() {
-      break;
-    }
+  while idx < instructions.len() {
     let old = instructions[idx];
     instructions[idx] += 1;
     if old < 0 {
@@ -35,10 +36,7 @@ fn p1(mut instructions: Vec<isize>) -> usize {
 fn p2(mut instructions: Vec<isize>) -> usize {
   let mut steps = 0;
   let mut idx = 0;
-  loop {
-    if idx >= instructions.len() {
-      break;
-    }
+  while idx < instructions.len() {
     let old = instructions[idx];
     if old >= 3 {
       instructions[idx] -= 1;
@@ -57,9 +55,13 @@ fn p2(mut instructions: Vec<isize>) -> usize {
 
 #[cfg(test)]
 mod test {
+  use {p1, p2, instructions};
+
   #[test]
   fn solutions() {
-    assert_eq!(360_603, p1());
-    assert_eq!(25_347_697, p2());
+    let ins = instructions();
+
+    assert_eq!(360_603, p1(ins.clone()));
+    assert_eq!(25_347_697, p2(ins));
   }
 }
