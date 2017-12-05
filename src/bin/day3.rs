@@ -7,12 +7,19 @@ fn main() {
   println!("{}", p2());
 }
 
+/// Calculate the answer for part 1 of day 3.
+///
+/// Uses a formula from the OEIS (https://oeis.org/A174344) to determine the coordinate pair
+/// representing the input. Then, it uses the Manhattan distance, which when either pair is (0, 0),
+/// is just the other pair summed (both parts absolute value).
 fn p1() -> i32 {
   let x = x(INPUT as i32);
   let y = y(INPUT as i32);
   x.abs() + y.abs()
 }
 
+/// The OEIS formula is shown as recursive, but since it only ever uses the previous value, we can
+/// rewrite it as iterative. Otherwise, it would recurse too deeply.
 fn x(n: i32) -> i32 {
   (2..n + 1).fold(0, |acc, n| {
     let k = (f64::from(4 * (n - 2) + 1).sqrt().floor() as i32) % 4;
@@ -20,6 +27,7 @@ fn x(n: i32) -> i32 {
   })
 }
 
+/// The same as the x formula, but instead of sin, cos is used.
 fn y(n: i32) -> i32 {
   (2..n + 1).fold(0, |acc, n| {
     let k = (f64::from(4 * (n - 2) + 1).sqrt().floor() as i32) % 4;
@@ -27,6 +35,10 @@ fn y(n: i32) -> i32 {
   })
 }
 
+/// Calculate the answer for part 2 of day 3.
+///
+/// Use a spiral coordinate-point generator and map each point to its value by checking all adjacent
+/// points to see if they've been generated yet.
 fn p2() -> usize {
   let mut values: HashMap<(i64, i64), usize> = HashMap::new();
   values.insert((0, 0), 1);
@@ -44,6 +56,7 @@ fn p2() -> usize {
   unreachable!()
 }
 
+/// Get all the possible adjacent points for any (x, y) pair.
 fn adjacent(x: i64, y: i64) -> Vec<(i64, i64)> {
   vec![
     (x + 1, y),
