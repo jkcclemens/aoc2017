@@ -41,8 +41,8 @@ mod test {
 
   #[test]
   fn check_given() {
-    assert!(is_valid("aa bb cc dd ee"));
-    assert!(!is_valid("aa bb cc dd aa"));
-    assert!(is_valid("aa bb cc dd aaa"));
+    assert!(is_valid(&"aa bb cc dd ee"));
+    assert!(!is_valid(&"aa bb cc dd aa"));
+    assert!(is_valid(&"aa bb cc dd aaa"));
   }
 }
