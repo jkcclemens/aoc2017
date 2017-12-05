@@ -29,11 +29,7 @@ fn p2(input: &[&str]) -> usize {
 fn is_valid_p2<T: AsRef<str>>(input: &T) -> bool {
   let parts: Vec<&str> = input.as_ref().split(' ').collect();
   let unique = parts.iter()
-    .map(|x| {
-      let mut chars: Vec<char> = x.chars().collect();
-      chars.sort();
-      chars
-    })
+    .map(|x| x.chars().sorted())
     .unique()
     .count();
   parts.len() == unique
