@@ -20,7 +20,7 @@ fn get_bottom() -> Program {
   // this is probably the most memory-inefficent way to do this
   let programs = Program::from_data(lines);
   // get the program with the highest holding depth, as that is the bottom
-  programs.into_iter().max_by_key(|x| x.holding_depth()).unwrap()
+  programs.into_iter().max_by_key(Program::holding_depth).unwrap()
 }
 
 fn p1(bottom: &Program) -> &str {
@@ -117,7 +117,7 @@ impl Program {
       return self.weight;
     }
 
-    let held: usize = self.holding.iter().map(|h| h.combined_weight()).sum();
+    let held: usize = self.holding.iter().map(Program::combined_weight).sum();
     held + self.weight
   }
 
@@ -127,7 +127,7 @@ impl Program {
       return true;
     }
 
-    self.holding.iter().map(|h| h.combined_weight()).all_equal()
+    self.holding.iter().map(Program::combined_weight).all_equal()
   }
 }
 
