@@ -11,7 +11,7 @@ fn main() {
 }
 
 fn get_bottom() -> Program {
-  // load the input and split it into strings
+  // load the input and split it into lines
   let mut f = File::open("inputs/day7").unwrap();
   let mut content = String::new();
   f.read_to_string(&mut content).unwrap();
