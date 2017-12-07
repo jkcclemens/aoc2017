@@ -44,12 +44,15 @@ fn p2(bottom: &Program) -> usize {
     // these are the "actual" weights
     let (aa, ab, ac) = (chunk[0].0, chunk[1].0, chunk[2].0);
     // find the unbalanced program
-    if a != b && a != c { // a is bad weight
-      // if a, the unbalanced program, is heavier than b, a balanced pgoram, subtract the difference
-      // from a. otherwise, add it to a.
+    // if a is unbalanced
+    if a != b && a != c {
+      // if a, the unbalanced program, is heavier than b, a balanced program, subtract the
+      // difference from a. otherwise, add it to a.
       return if a > b { aa - (a - b) } else { aa + (b - a) };
+    // if b is unbalanced
     } else if b != a && b != c { // b is bad weight
       return if b > a { ab - (b - a) } else { ab + (a - b) };
+    // if c is unbalanced
     } else if c != a && c != b { // c is bad weight
       return if c > a { ac - (c - a) } else { ac + (a - c) };
     }
