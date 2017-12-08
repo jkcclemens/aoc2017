@@ -30,7 +30,7 @@ fn p2() -> usize {
 
 fn redistribute(data: &mut [usize]) {
   let mut max_index = data.iter().enumerate().fold(0, |acc, (i, x)| {
-    if x != &data[acc] && std::cmp::max(&data[acc], x) == x {
+    if x > &data[acc] {
       i
     } else {
       acc
