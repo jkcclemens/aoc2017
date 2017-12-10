@@ -16,8 +16,7 @@ fn p1() -> usize {
 }
 
 fn p2() -> String {
-  let mut hasher = Hasher::from_str(INPUT_P2);
-  hasher.hash()
+  Hasher::from_str(INPUT_P2).hash()
 }
 
 struct Hasher {
@@ -42,9 +41,7 @@ impl Hasher {
   }
 
   /// Calculate the hash of the given input.
-  ///
-  /// This method will not produce the same result if called more than once.
-  fn hash(&mut self) -> String {
+  fn hash(mut self) -> String {
     const SUFFIX: &[u8] = &[17, 31, 73, 47, 23];
 
     // add the suffix on to the current lengths
