@@ -1,20 +1,17 @@
 use *;
 use nom::alpha;
 
+named!(amt<&str, isize>, map_res!(is_a!("-0123456789"), str::parse));
 named!(instruction<&str, Instruction>, ws!(do_parse!(
   name: alpha >>
-  op: alt!(tag!("inc") | tag!("dec")) >>
-  op: expr_opt!(Operation::from_str(op)) >>
-  amt: is_a!("-0123456789") >>
-  amt: expr_res!(amt.parse::<isize>()) >>
+  op: map_opt!(alt!(tag!("inc") | tag!("dec")), Operation::from_str) >>
+  amt: amt >>
   (Instruction::new(name, op, amt))
 )));
 named!(condition<&str, Condition>, ws!(do_parse!(
   name: alpha >>
-  op: is_a!("=!><") >>
-  op: expr_opt!(Operator::from_str(op)) >>
-  amt: is_a!("-0123456789") >>
-  amt: expr_res!(amt.parse::<isize>()) >>
+  op: map_opt!(is_a!("=!><"), Operator::from_str) >>
+  amt: amt >>
   (Condition::new(name, op, amt))
 )));
 named!(statement<&str, Statement>, ws!(do_parse!(
