@@ -9,7 +9,7 @@ fn main() {
 
 /// Calculate the answer for part 1 of day 3.
 ///
-/// Uses a formula from the OEIS (https://oeis.org/A174344) to determine the coordinate pair
+/// Uses a formula from the OEIS (<https://oeis.org/A174344>) to determine the coordinate pair
 /// representing the input. Then, it uses the Manhattan distance, which when either pair is (0, 0),
 /// is just the other pair summed (both parts absolute value).
 fn p1() -> i32 {
