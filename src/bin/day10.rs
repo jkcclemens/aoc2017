@@ -38,12 +38,7 @@ impl Hasher {
   }
 
   fn from_str(input: &str) -> Hasher {
-    Hasher {
-      list: LIST.to_vec(),
-      pos: 0,
-      skip: 0,
-      lengths: input.as_bytes().to_vec()
-    }
+    Hasher::new(LIST.to_vec(), input.as_bytes().to_vec())
   }
 
   /// Calculate the hash of the given input.
