@@ -14,7 +14,7 @@ fn get_bottom() -> Program {
   // load the input and split it into lines
   let lines = data(7).and_then(Data::lines).unwrap();
   // turn every line into a program, potentially holding other programs
-  // this is probably the most memory-inefficent way to do this
+  // this is probably the most memory-inefficient way to do this
   let programs = Program::from_data(lines);
   // get the program with the highest holding depth, as that is the bottom
   programs.into_iter().max_by_key(Program::holding_depth).unwrap()
