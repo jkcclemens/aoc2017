@@ -5,3 +5,4 @@ authors = ["Kyle Clemens <jkc.clemens@gmail.com>"]
 
 [dependencies]
 itertools = "0.7"
+hex = "0.3"
