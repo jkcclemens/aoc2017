@@ -66,9 +66,9 @@ impl Statement {
       let parts: Vec<&str> = line.split(' ').collect();
       let stmt_reg = parts[0].to_string();
       let stmt_amt: isize = parts[2].parse().unwrap();
-      let stmt_ins = Instruction::parse(&parts[1], stmt_amt);
+      let stmt_ins = Instruction::parse(parts[1], stmt_amt);
       let op_reg = parts[4].to_string();
-      let op_op = Operator::parse(&parts[5]);
+      let op_op = Operator::parse(parts[5]);
       let op_amt: isize = parts[6].parse().unwrap();
       let stmt = Statement {
         reg: stmt_reg,
