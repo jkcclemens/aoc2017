@@ -208,14 +208,10 @@ mod test {
 
   #[bench]
   fn bench(b: &mut Bencher) {
-    use std::fs::File;
-    use std::io::Read;
+    use adventofcode::{Data, data};
     use Statement;
 
-    let mut f = File::open("inputs/day8").unwrap();
-    let mut content = String::new();
-    f.read_to_string(&mut content).unwrap();
-    let lines: Vec<&str> = content.split('\n').filter(|x| !x.is_empty()).collect();
+    let lines = data(8).and_then(Data::lines).unwrap();
     b.iter(|| Statement::parse(&lines))
   }
 }
