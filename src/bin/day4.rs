@@ -1,11 +1,11 @@
 extern crate adventofcode;
 extern crate itertools;
 
-use adventofcode::data;
+use adventofcode::{Data, data};
 use itertools::Itertools;
 
 fn main() {
-  let parts = data(4).unwrap().lines().unwrap();
+  let parts = data(4).and_then(Data::lines).unwrap();
 
   println!("{}", p1(&parts));
   println!("{}", p2(&parts));

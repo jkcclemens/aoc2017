@@ -2,7 +2,7 @@
 
 extern crate adventofcode;
 
-use adventofcode::data;
+use adventofcode::{Data, data};
 use std::collections::HashMap;
 
 fn main() {
@@ -15,7 +15,7 @@ fn main() {
 }
 
 fn get_input() -> String {
-  data(9).unwrap().text().unwrap()
+  data(9).and_then(Data::text).unwrap()
 }
 
 fn p1(group: &Group) -> usize {

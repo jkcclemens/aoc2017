@@ -1,7 +1,7 @@
 extern crate adventofcode;
 extern crate itertools;
 
-use adventofcode::data;
+use adventofcode::{Data, data};
 use itertools::Itertools;
 
 fn main() {
@@ -12,7 +12,7 @@ fn main() {
 
 fn get_bottom() -> Program {
   // load the input and split it into lines
-  let lines = data(7).unwrap().lines().unwrap();
+  let lines = data(7).and_then(Data::lines).unwrap();
   // turn every line into a program, potentially holding other programs
   // this is probably the most memory-inefficent way to do this
   let programs = Program::from_data(lines);

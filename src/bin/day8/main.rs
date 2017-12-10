@@ -5,7 +5,7 @@
 extern crate nom;
 extern crate adventofcode;
 
-use adventofcode::data;
+use adventofcode::{Data, data};
 use std::collections::HashMap;
 use std::str::FromStr;
 
@@ -22,7 +22,7 @@ fn main() {
 }
 
 fn get_statements() -> Vec<Statement> {
-  let lines = data(8).unwrap().lines().unwrap();
+  let lines = data(8).and_then(Data::lines).unwrap();
   Statement::parse(&lines)
 }
 

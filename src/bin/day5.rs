@@ -1,6 +1,6 @@
 extern crate adventofcode;
 
-use adventofcode::data;
+use adventofcode::{Data, data};
 
 fn main() {
   let instructions = instructions();
@@ -10,7 +10,7 @@ fn main() {
 }
 
 fn instructions() -> Vec<isize> {
-  data(5).unwrap().text().unwrap()
+  data(5).and_then(Data::text).unwrap()
     .lines()
     .map(|x| x.parse().unwrap())
     .collect()
