@@ -76,7 +76,7 @@ impl Hasher {
     let list_size = self.list.len();
     let bytes: Vec<u8> = self.list.iter()
       .cycle() // make the iterator repeat itself forever
-      .skip(self.pos % list_size) // skip to current pos
+      .skip(self.pos) // skip to current pos
       .take(length) // take this length
       .cloned()
       .collect();
@@ -91,7 +91,7 @@ impl Hasher {
     // update the position, wrapping if necessary
     self.pos += length + self.skip;
     if self.pos >= list_size {
-      self.pos -= list_size;
+      self.pos %= list_size;
     }
     // increment the skip
     self.skip += 1;
