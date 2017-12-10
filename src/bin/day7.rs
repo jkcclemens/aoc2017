@@ -87,8 +87,7 @@ impl Program {
         // first part is the name
         let name = parts[0].to_string();
         // second part is the weight in parentheses
-        let weight = &parts[1];
-        let weight: usize = weight[1..weight.len() - 1].parse().unwrap();
+        let weight: usize = parts[1].trim_matches(|x| x == '(' || x == ')').parse().unwrap();
         // get any held programs
         let holding = if parts.len() >= 4 {
           let together = parts[3..].join(" ");
