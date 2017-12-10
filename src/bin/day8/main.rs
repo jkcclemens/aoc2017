@@ -7,6 +7,7 @@ extern crate nom;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::Read;
+use std::str::FromStr;
 
 #[cfg(not(feature = "with_nom"))]
 mod std_impl;
@@ -113,15 +114,19 @@ pub enum Operation {
   Decrease
 }
 
-impl Operation {
-  pub fn from_str(input: &str) -> Option<Operation> {
+impl FromStr for Operation {
+  type Err = ();
+
+  fn from_str(input: &str) -> Result<Self, Self::Err> {
     match input {
-      "inc" => Some(Operation::Increase),
-      "dec" => Some(Operation::Decrease),
-      _ => None
+      "dec" => Ok(Operation::Decrease),
+      "inc" => Ok(Operation::Increase),
+      _ => Err(())
     }
   }
+}
 
+impl Operation {
   pub fn process(&self, reg: &mut isize, amt: isize) {
     match *self {
       Operation::Increase => *reg += amt,
@@ -140,19 +145,23 @@ pub enum Operator {
   NotEquals
 }
 
-impl Operator {
-  pub fn from_str(input: &str) -> Option<Operator> {
+impl FromStr for Operator {
+  type Err = ();
+
+  fn from_str(input: &str) -> Result<Self, Self::Err> {
     match input {
-      "<" => Some(Operator::LessThan),
-      ">" => Some(Operator::GreaterThan),
-      "<=" => Some(Operator::LessThanEqualTo),
-      ">=" => Some(Operator::GreaterThanEqualTo),
-      "==" => Some(Operator::Equals),
-      "!=" => Some(Operator::NotEquals),
-      _ => None
+      "<" => Ok(Operator::LessThan),
+      ">" => Ok(Operator::GreaterThan),
+      "<=" => Ok(Operator::LessThanEqualTo),
+      ">=" => Ok(Operator::GreaterThanEqualTo),
+      "==" => Ok(Operator::Equals),
+      "!=" => Ok(Operator::NotEquals),
+      _ => Err(())
     }
   }
+}
 
+impl Operator {
   pub fn process(&self, lhs: isize, rhs: isize) -> bool {
     match *self {
       Operator::LessThan => lhs < rhs,
