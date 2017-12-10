@@ -6,3 +6,7 @@ authors = ["Kyle Clemens <jkc.clemens@gmail.com>"]
 [dependencies]
 itertools = "0.7"
 hex = "0.3"
+nom = { version = "4.0.0-alpha1", optional = true }
+
+[features]
+with_nom = ["nom"]
