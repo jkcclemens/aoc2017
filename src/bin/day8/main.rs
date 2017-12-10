@@ -3,10 +3,10 @@
 #[cfg(feature = "with_nom")]
 #[macro_use]
 extern crate nom;
+extern crate adventofcode;
 
+use adventofcode::data;
 use std::collections::HashMap;
-use std::fs::File;
-use std::io::Read;
 use std::str::FromStr;
 
 #[cfg(not(feature = "with_nom"))]
@@ -22,10 +22,7 @@ fn main() {
 }
 
 fn get_statements() -> Vec<Statement> {
-  let mut f = File::open("inputs/day8").unwrap();
-  let mut content = String::new();
-  f.read_to_string(&mut content).unwrap();
-  let lines: Vec<&str> = content.split('\n').filter(|x| !x.is_empty()).collect();
+  let lines = data(8).unwrap().lines().unwrap();
   Statement::parse(&lines)
 }
 

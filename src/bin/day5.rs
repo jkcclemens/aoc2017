@@ -1,5 +1,6 @@
-use std::fs::File;
-use std::io::Read;
+extern crate adventofcode;
+
+use adventofcode::data;
 
 fn main() {
   let instructions = instructions();
@@ -9,10 +10,8 @@ fn main() {
 }
 
 fn instructions() -> Vec<isize> {
-  let mut content = String::new();
-  File::open("./inputs/day5").unwrap().read_to_string(&mut content).unwrap();
-  content.split('\n')
-    .filter(|x| !x.is_empty())
+  data(5).unwrap().text().unwrap()
+    .lines()
     .map(|x| x.parse().unwrap())
     .collect()
 }

@@ -1,19 +1,17 @@
+extern crate adventofcode;
 extern crate itertools;
 
+use adventofcode::data;
 use itertools::Itertools;
-use std::fs::File;
-use std::io::Read;
 
 fn main() {
-  let mut content = String::new();
-  File::open("./inputs/day4").unwrap().read_to_string(&mut content).unwrap();
-  let parts: Vec<&str> = content.split('\n').filter(|x| !x.is_empty()).collect();
+  let parts = data(4).unwrap().lines().unwrap();
 
   println!("{}", p1(&parts));
   println!("{}", p2(&parts));
 }
 
-fn p1(input: &[&str]) -> usize {
+fn p1<T: AsRef<str>>(input: &[T]) -> usize {
   input.iter().filter(is_valid).count()
 }
 
@@ -22,7 +20,7 @@ fn is_valid<T: AsRef<str>>(input: &T) -> bool {
   parts.len() == parts.iter().unique().count()
 }
 
-fn p2(input: &[&str]) -> usize {
+fn p2<T: AsRef<str>>(input: &[T]) -> usize {
   input.iter().filter(is_valid_p2).count()
 }
 
@@ -37,7 +35,16 @@ fn is_valid_p2<T: AsRef<str>>(input: &T) -> bool {
 
 #[cfg(test)]
 mod test {
-  use is_valid;
+  use adventofcode::data;
+  use {p1, p2, is_valid};
+
+  #[test]
+  fn solution() {
+    let parts = data(4).unwrap().lines().unwrap();
+
+    assert_eq!(451, p1(&parts));
+    assert_eq!(223, p2(&parts));
+  }
 
   #[test]
   fn check_given() {

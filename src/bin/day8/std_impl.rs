@@ -1,10 +1,10 @@
 use *;
 
 impl Statement {
-  pub fn parse(input: &[&str]) -> Vec<Statement> {
+  pub fn parse<T: AsRef<str>>(input: &[T]) -> Vec<Statement> {
     let mut vec = Vec::new();
     for line in input {
-      let parts: Vec<&str> = line.split(' ').collect();
+      let parts: Vec<&str> = line.as_ref().split(' ').collect();
       let ins_reg = &parts[0];
       let ins_amt: isize = parts[2].parse().unwrap();
       let ins_op = Operation::from_str(parts[1]).expect("invalid operation");

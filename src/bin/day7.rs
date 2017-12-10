@@ -1,8 +1,8 @@
+extern crate adventofcode;
 extern crate itertools;
 
+use adventofcode::data;
 use itertools::Itertools;
-use std::fs::File;
-use std::io::Read;
 
 fn main() {
   let bottom = get_bottom();
@@ -12,10 +12,7 @@ fn main() {
 
 fn get_bottom() -> Program {
   // load the input and split it into lines
-  let mut f = File::open("inputs/day7").unwrap();
-  let mut content = String::new();
-  f.read_to_string(&mut content).unwrap();
-  let lines = content.split('\n').filter(|x| !x.is_empty()).collect();
+  let lines = data(7).unwrap().lines().unwrap();
   // turn every line into a program, potentially holding other programs
   // this is probably the most memory-inefficent way to do this
   let programs = Program::from_data(lines);
@@ -79,11 +76,11 @@ impl Program {
 }
 
 impl Program {
-  fn from_data(input: Vec<&str>) -> Vec<Program> {
+  fn from_data<T: AsRef<str>>(input: Vec<T>) -> Vec<Program> {
     let internal_programs: Vec<(String, usize, Vec<String>)> = input.into_iter()
       .map(|line| {
         // split each line by space
-        let parts: Vec<&str> = line.split(' ').collect();
+        let parts: Vec<&str> = line.as_ref().split(' ').collect();
         // first part is the name
         let name = parts[0].to_string();
         // second part is the weight in parentheses

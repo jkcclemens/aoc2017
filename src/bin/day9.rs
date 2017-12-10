@@ -1,7 +1,8 @@
 #![feature(entry_or_default)]
 
-use std::fs::File;
-use std::io::Read;
+extern crate adventofcode;
+
+use adventofcode::data;
 use std::collections::HashMap;
 
 fn main() {
@@ -14,10 +15,7 @@ fn main() {
 }
 
 fn get_input() -> String {
-  let mut f = File::open("inputs/day9").unwrap();
-  let mut content = String::new();
-  f.read_to_string(&mut content).unwrap();
-  content
+  data(9).unwrap().text().unwrap()
 }
 
 fn p1(group: &Group) -> usize {

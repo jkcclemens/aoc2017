@@ -22,7 +22,7 @@ named!(statement<&str, Statement>, ws!(do_parse!(
 )));
 
 impl Statement {
-  pub fn parse(input: &[&str]) -> Vec<Statement> {
-    input.iter().map(|x| statement(x).expect("invalid statement").1).collect()
+  pub fn parse<T: AsRef<str>>(input: &[T]) -> Vec<Statement> {
+    input.iter().map(|x| statement(x.as_ref()).expect("invalid statement").1).collect()
   }
 }
